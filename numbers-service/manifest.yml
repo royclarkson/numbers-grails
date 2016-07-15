@@ -1,0 +1,11 @@
+---
+instances: 2
+memory: 1G
+applications:
+- name: numbers-service
+  host: numbers-service
+  path: build/libs/numbers-service-0.1.war
+  services:
+  - service-registry
+env:
+  CF_TARGET: https://api.<your-cf-env>

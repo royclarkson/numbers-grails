@@ -1,0 +1,14 @@
+---
+instances: 1
+memory: 1G
+applications:
+- name: numbers
+  host: numbers
+  path: build/libs/numbers-0.1.war
+  services:
+  - service-registry
+  - config-server
+  - circuit-breaker-dashboard
+env:
+  CF_TARGET: https://api.<your-cf-env>
+  ENDPOINTS_ENV_SENSITIVE: false

@@ -1,6 +1,6 @@
 = Numbers on Grails
 
-Numbers is a sample application that demonstrates the use of Grails applications interacting with Spring Cloud services.
+Numbers is a collection of sample applications that demonstrate the use of Grails and Spring Cloud.
 
 == Eureka Server
 
@@ -61,7 +61,7 @@ The numbers app is the main "UI" for the application. Eureka tells the numbers a
 In a new terminal window, build and run the Numbers UI:
 
 ----
-cd numbers-app
+cd numbers
 grails run-app
 ----
 
@@ -77,4 +77,26 @@ Or make multiple requests:
 
 ----
 while true; do curl http://localhost:8080/; echo; sleep .1; done
+----
+
+Note the activity on the Hystrix Dashboard. Stop the Numbers Service to see the circuit breaker in action. The Hystrix Dashboard will show the failed requests to the Numbers Service. Restart the Numbers Service and you will see the Hystrix Dashboard eventually return to green.
+
+== Pivotal Cloud Foundry with Spring Cloud Services
+
+Create Config Server, Circuit Breaker, and Service Registry services:
+
+----
+./scripts/cf-create-services.sh
+----
+
+Verify services have been successfully created:
+
+----
+cf services
+----
+
+Build and deploy Numbers app and Numbers Service:
+
+----
+./scripts/cf-deploy.sh
 ----

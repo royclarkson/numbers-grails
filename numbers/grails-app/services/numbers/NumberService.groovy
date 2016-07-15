@@ -1,5 +1,6 @@
 package numbers
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import grails.transaction.Transactional
 import groovy.json.JsonSlurper
 import org.springframework.beans.factory.annotation.Value
@@ -18,7 +19,7 @@ class NumberService {
         return defaultNumber
     }
 
-//    @HystrixCommand(fallbackMethod = 'getDefaultNumber')
+   @HystrixCommand(fallbackMethod = 'getDefaultNumber')
     def nextNumber() {
         def result = jsonSlurper.parseText(rest.getForObject('https://numbers-service/number', String.class))
         return result.number
